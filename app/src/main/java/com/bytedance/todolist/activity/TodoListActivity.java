@@ -64,6 +64,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
                             dao.addTodo(new TodoListEntity("This is " + i + " item", new Date(System.currentTimeMillis())));
                         }
                         Snackbar.make(mFab, R.string.hint_insert_complete, Snackbar.LENGTH_SHORT).show();
+                        loadFromDatabase();
                     }
                 }.start();
                 return true;
@@ -74,11 +75,19 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String content = data.getStringExtra("content");
-        Date date = (Date)data.getSerializableExtra("date");
-        Log.d(TAG,"insert content : " + content + " date : " + date);
-        TodoListEntity entity = new TodoListEntity(content,date);
-        mAdapter.addData(entity);
+        super.onActivityResult(requestCode, resultCode, data);
+        final String content = data.getStringExtra("content");
+        final Date date = (Date) data.getSerializableExtra("date");
+        Log.d(TAG, "insert content : " + content + " date : " + date);
+        final TodoListEntity entity = new TodoListEntity(content, date);
+        new Thread() {
+            @Override
+            public void run() {
+                TodoListDao dao = TodoListDatabase.inst(TodoListActivity.this).todoListDao();
+                dao.addTodo(entity);
+                loadFromDatabase();
+            }
+        }.start();
     }
 
     private void loadFromDatabase() {
@@ -107,7 +116,6 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
                 TodoListEntity entity = dao.findById(ID);
                 entity.setFlag(isChecked);
                 dao.updateTodo(entity);
-
             }
         }.start();
     }

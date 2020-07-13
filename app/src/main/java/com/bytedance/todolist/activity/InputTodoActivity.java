@@ -34,15 +34,7 @@ public class InputTodoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String content = editText.getText().toString();
                 final Date date = new Date(System.currentTimeMillis());
-                new Thread(){
-                    @Override
-                    public void run() {
-                        TodoListDao dao = TodoListDatabase.inst(InputTodoActivity.this).todoListDao();
-                        dao.addTodo(new TodoListEntity(content,date));
-                    }
-                }.start();
                 Intent intent = new Intent();
-                Bundle bundle = new Bundle();
                 intent.putExtra("content",content);
                 intent.putExtra("date",date);
                 setResult(1,intent);
