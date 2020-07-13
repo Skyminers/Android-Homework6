@@ -23,7 +23,7 @@ import java.util.List;
  * @since Jul 11, 2020
  */
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListItemHolder> {
-    private List<TodoListEntity> mDatas;
+    private ArrayList<TodoListEntity> mDatas;
     private ItemOnClickCheckListener itemOnClickCheckListener;
     private String TAG = "ejrnejhncjsncjhdfn";
 
@@ -54,6 +54,9 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListItemHolder> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 holder.setUI(isChecked);
+                TodoListEntity tmp = mDatas.get(position);
+                tmp.setFlag(isChecked);
+                mDatas.set(position,tmp);
                 if(itemOnClickCheckListener != null){
                     itemOnClickCheckListener.onCheckedChanged(mDatas.get(position).getId(),isChecked);
                 }
@@ -78,7 +81,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListItemHolder> {
 
     @MainThread
     public void setData(List<TodoListEntity> list) {
-        mDatas = list;
+        mDatas = (ArrayList)list;
         notifyDataSetChanged();
     }
 

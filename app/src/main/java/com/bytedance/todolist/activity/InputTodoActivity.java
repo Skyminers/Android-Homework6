@@ -10,10 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bytedance.todolist.R;
-import com.bytedance.todolist.database.DateConverter;
-import com.bytedance.todolist.database.TodoListDao;
-import com.bytedance.todolist.database.TodoListDatabase;
-import com.bytedance.todolist.database.TodoListEntity;
 
 import java.util.Date;
 

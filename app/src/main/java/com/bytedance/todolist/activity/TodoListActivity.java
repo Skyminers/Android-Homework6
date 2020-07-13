@@ -113,7 +113,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
             @Override
             public void run() {
                 TodoListDao dao = TodoListDatabase.inst(TodoListActivity.this).todoListDao();
-                Log.d(TAG,"Search with ID : " + ID);
+                Log.d(TAG,"Search with ID : " + ID + " " + isChecked);
                 TodoListEntity entity = dao.findById(ID);
                 entity.setFlag(isChecked);
                 dao.updateTodo(entity);
