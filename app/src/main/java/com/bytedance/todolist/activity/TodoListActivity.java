@@ -108,7 +108,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
     }
 
     @Override
-    public void onCheckedChanged(final Long ID, final boolean isChecked) {
+    public void onClickCheckBox(final Long ID, final boolean isChecked) {
         new Thread(){
             @Override
             public void run() {

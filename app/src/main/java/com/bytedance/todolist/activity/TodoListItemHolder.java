@@ -38,8 +38,8 @@ public class TodoListItemHolder extends RecyclerView.ViewHolder {
         btn = itemView.findViewById(R.id.removeBtn);
     }
 
-    public void setCheckBoxListener(CheckBox.OnCheckedChangeListener listener){
-        checkBox.setOnCheckedChangeListener(listener);
+    public void setCheckBoxListener(CheckBox.OnClickListener listener){
+        checkBox.setOnClickListener(listener);
     }
 
     public void setImageBtnListener(ImageButton.OnClickListener listener){
@@ -47,6 +47,7 @@ public class TodoListItemHolder extends RecyclerView.ViewHolder {
     }
 
     public void setUI(Boolean flag){
+        checkBox.setChecked(flag);
         if(flag){
             mContent.setPaintFlags(mContent.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             mTimestamp.setPaintFlags(mTimestamp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -60,7 +61,6 @@ public class TodoListItemHolder extends RecyclerView.ViewHolder {
         ID = entity.getId();
         mContent.setText(entity.getContent());
         mTimestamp.setText(formatDate(entity.getTime()));
-        checkBox.setChecked(entity.getFlag());
         setUI(entity.getFlag());
     }
 
