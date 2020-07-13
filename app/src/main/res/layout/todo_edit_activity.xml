@@ -8,8 +8,9 @@
         android:layout_height="300dp"
         android:layout_margin="10dp"
         android:hint="@string/inputHint"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:background="@drawable/border"
+        android:gravity="left|top"
         />
     <Button
         android:id="@+id/submit"
