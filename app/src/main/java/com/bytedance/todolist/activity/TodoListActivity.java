@@ -1,5 +1,6 @@
 package com.bytedance.todolist.activity;
 
+import android.content.Entity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -47,7 +48,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
             public void onClick(View view) {
                 // TODO
                 Intent intent = new Intent(TodoListActivity.this,InputTodoActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -69,6 +70,15 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
             }
         });
         loadFromDatabase();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String content = data.getStringExtra("content");
+        Date date = (Date)data.getSerializableExtra("date");
+        Log.d(TAG,"insert content : " + content + " date : " + date);
+        TodoListEntity entity = new TodoListEntity(content,date);
+        mAdapter.addData(entity);
     }
 
     private void loadFromDatabase() {
