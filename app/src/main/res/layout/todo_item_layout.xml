@@ -8,7 +8,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_marginStart="40dp"
         android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/removeBtn"
+        android:layout_marginEnd="40dp"
         android:textColor="@android:color/black"
         tools:text="This is the content"/>
     <TextView
@@ -17,7 +21,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_content"
         android:layout_marginTop="3dp"
+        android:layout_alignEnd="@+id/removeBtn"
+        android:layout_marginEnd="40dp"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_marginStart="40dp"
         android:textSize="14sp"
         android:textColor="@android:color/darker_gray"
         tools:text="This is the timestamp"/>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"/>
+
+    <ImageButton
+        android:id="@+id/removeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:background="#00000000"
+        android:src="@drawable/ic_baseline_clear_24" />
 </RelativeLayout>

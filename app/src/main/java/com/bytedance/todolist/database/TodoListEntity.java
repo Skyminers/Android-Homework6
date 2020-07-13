@@ -23,9 +23,13 @@ public class TodoListEntity {
     @ColumnInfo(name = "time")
     private Date mTime;
 
+    @ColumnInfo(name = "flag")
+    private boolean flag;
+
     public TodoListEntity(String mContent, Date mTime) {
         this.mContent = mContent;
         this.mTime = mTime;
+        this.flag = false;
     }
 
     public String getContent() {
@@ -50,5 +54,13 @@ public class TodoListEntity {
 
     public void setId(Long mId) {
         this.mId = mId;
+    }
+
+    public Boolean getFlag(){
+        return flag;
+    }
+
+    public void setFlag(Boolean flag){
+        this.flag = flag;
     }
 }

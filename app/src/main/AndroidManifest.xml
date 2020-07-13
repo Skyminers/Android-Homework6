@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.InputTodoActivity"
+            android:label="InputTodo"/>
+        <activity android:name=".activity" android:theme="@android:style/Theme.NoDisplay"> </activity>
     </application>
 
 </manifest>

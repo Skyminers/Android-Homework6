@@ -11,7 +11,7 @@ import androidx.room.TypeConverters;
  * @author wangrui.sh
  * @since Jul 11, 2020
  */
-@Database(entities = {TodoListEntity.class}, version = 1)
+@Database(entities = {TodoListEntity.class}, version = 2)
 @TypeConverters(DateConverter.class)
 public abstract class TodoListDatabase extends RoomDatabase {
     private static volatile TodoListDatabase INSTANCE;

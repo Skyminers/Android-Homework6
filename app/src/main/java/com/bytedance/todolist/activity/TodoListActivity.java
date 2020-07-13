@@ -1,5 +1,6 @@
 package com.bytedance.todolist.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.bytedance.todolist.database.TodoListDao;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 
 import com.bytedance.todolist.R;
@@ -20,10 +22,11 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Date;
 import java.util.List;
 
-public class TodoListActivity extends AppCompatActivity {
+public class TodoListActivity extends AppCompatActivity implements TodoListAdapter.ItemOnClickCheckListener{
 
     private TodoListAdapter mAdapter;
     private FloatingActionButton mFab;
+    private String TAG = "TodoListActivityTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class TodoListActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new TodoListAdapter();
+        mAdapter.setItemOnClickCheckListener(this);
         recyclerView.setAdapter(mAdapter);
 
         mFab = findViewById(R.id.fab);
@@ -42,6 +46,8 @@ public class TodoListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO
+                Intent intent = new Intent(TodoListActivity.this,InputTodoActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -77,6 +83,33 @@ public class TodoListActivity extends AppCompatActivity {
                         mAdapter.setData(entityList);
                     }
                 });
+            }
+        }.start();
+    }
+
+    @Override
+    public void onCheckedChanged(final Long ID, final boolean isChecked) {
+        new Thread(){
+            @Override
+            public void run() {
+                TodoListDao dao = TodoListDatabase.inst(TodoListActivity.this).todoListDao();
+                Log.d(TAG,"Search with ID : " + ID);
+                TodoListEntity entity = dao.findById(ID);
+                entity.setFlag(isChecked);
+                dao.updateTodo(entity);
+
+            }
+        }.start();
+    }
+
+    @Override
+    public void onClickButton(final Long ID) {
+        new Thread(){
+            @Override
+            public void run() {
+                TodoListDao dao = TodoListDatabase.inst(TodoListActivity.this).todoListDao();
+                Log.d(TAG,"Delete ID : " + ID);
+                dao.deleteTodo(ID);
             }
         }.start();
     }
