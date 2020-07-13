@@ -28,7 +28,7 @@ public class InputTodoActivity extends AppCompatActivity {
         setContentView(R.layout.todo_edit_activity);
         editText = findViewById(R.id.text);
         submit = findViewById(R.id.submit);
-
+        setResult(1);
         submit.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -37,7 +37,7 @@ public class InputTodoActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("content",content);
                 intent.putExtra("date",date);
-                setResult(1,intent);
+                setResult(0,intent);
                 finish();
             }
         });

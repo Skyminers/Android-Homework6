@@ -76,6 +76,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListAdapt
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != 0) return;
         final String content = data.getStringExtra("content");
         final Date date = (Date) data.getSerializableExtra("date");
         Log.d(TAG, "insert content : " + content + " date : " + date);
