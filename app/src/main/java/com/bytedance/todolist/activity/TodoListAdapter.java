@@ -46,11 +46,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListItemHolder> {
         }
     }
 
-    public void addData(TodoListEntity data) {
-        mDatas.add(data);
-        notifyItemInserted(mDatas.size());
-    }
-
     @Override
     public void onBindViewHolder(@NonNull final TodoListItemHolder holder, final int position) {
         holder.bind(mDatas.get(position));
